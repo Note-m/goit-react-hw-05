@@ -1,0 +1,19 @@
+.searchForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.searchInp {
+  height: 39px;
+  border-radius: 4px;
+  border: none;
+  outline: 1px solid darkseagreen;
+}
+.searchBtn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  background-color: darkseagreen;
+  font-size: 15px;
+}
