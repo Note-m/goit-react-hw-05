@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px slod black;
+}
+.active {
+  font-size: 32px;
+}
