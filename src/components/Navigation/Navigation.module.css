@@ -1,8 +1,24 @@
 .container {
   display: flex;
-  gap: 10px;
-  border-bottom: 1px slod black;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  background: bisque;
+  height: 40px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.navLink {
+  text-decoration: none;
+  color: mediumseagreen;
+  font-size: 24px;
+}
+.movieLink {
+  text-decoration: none;
+  color: mediumseagreen;
+  font-size: 24px;
 }
 .active {
-  font-size: 32px;
+  color: olivedrab;
 }

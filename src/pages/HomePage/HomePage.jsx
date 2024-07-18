@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import css from "./MovieCast.module.css";
+import css from "./HomePage.module.css";
 
-const MovieCast = () => {
-  const { id } = useParams();
+const HomePage = () => {
+  const location = useLocation();
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(false);
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
+          "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
           {
             headers: {
               Authorization:
@@ -21,7 +21,7 @@ const MovieCast = () => {
             },
           }
         );
-        setMovies(response.data.cast);
+        setMovies(response.data.results);
       } catch (error) {
         setError(true);
       }
@@ -29,17 +29,19 @@ const MovieCast = () => {
     fetchMovies();
   }, []);
   return (
-    <div>
+    <div className={css.containe}>
+      <h1 className={css.title}>Trend movies</h1>
       {error && <p>Error :{error.message}</p>}
-      <ul className={css.castList}>
+      <ul className={css.homeList}>
         {movies.map((movie) => (
-          <li className={css.castItem} key={movie.id}>
-            <img
-              className={css.castImage}
-              src={`https://image.tmdb.org/t/p/w200${movie.profile_path}`}
-              alt=""
-            />
-            <p className={css.name}>{movie.original_name}</p>
+          <li key={movie.id}>
+            <Link
+              className={css.movieName}
+              to={`/movie/${movie.id}`}
+              state={location}
+            >
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>
@@ -47,4 +49,4 @@ const MovieCast = () => {
   );
 };
 
-export default MovieCast;
+export default HomePage;

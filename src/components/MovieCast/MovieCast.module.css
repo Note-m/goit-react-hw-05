@@ -1,0 +1,22 @@
+.castList {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+.castImage {
+  width: 200px;
+  height: 300px;
+}
+.castItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid forestgreen;
+}
+.name {
+  font-size: 18px;
+}

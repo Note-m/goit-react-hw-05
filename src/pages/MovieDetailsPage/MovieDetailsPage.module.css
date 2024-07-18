@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.linkContainer {
+  display: flex;
+  gap: 12px;
+}
+.link {
+  text-decoration: none;
+  color: teal;
+  font-size: 24px;
+}
+.overview {
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  width: 600px;
+}
+.img {
+  width: 500px;
+}
