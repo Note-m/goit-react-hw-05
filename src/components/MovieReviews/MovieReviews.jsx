@@ -30,7 +30,7 @@ const MovieReviews = () => {
   }, [movieId]);
   return (
     <div>
-      {error && <p>No reviews for this movie!</p>}
+      {/* {error && <p>No reviews for this movie</p>} */}
       {reviews.length > 0 ? (
         <ul className={css.revList}>
           {reviews.map((review) => (
@@ -43,7 +43,7 @@ const MovieReviews = () => {
           ))}
         </ul>
       ) : (
-        <p>error</p>
+        <p>No reviews for this movie</p>
       )}
     </div>
   );
