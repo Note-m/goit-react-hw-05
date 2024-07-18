@@ -5,14 +5,14 @@ import axios from "axios";
 import css from "./MovieReviews.module.css";
 
 const MovieReviews = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(false);
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US&page=1`,
+          `https://api.themoviedb.org/3/movie/${movieId}/reviews?language=en-US&page=1`,
           {
             headers: {
               Authorization:
@@ -27,10 +27,10 @@ const MovieReviews = () => {
       }
     };
     fetchMovies();
-  }, [id]);
+  }, [movieId]);
   return (
     <div>
-      {error && <p>Error :{error.message}</p>}
+      {error && <p>No reviews for this movie!</p>}
       {reviews.length > 0 ? (
         <ul className={css.revList}>
           {reviews.map((review) => (

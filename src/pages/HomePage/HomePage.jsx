@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
-import { Link, useLocation } from "react-router-dom";
+import MovieList from "../../components/MovieList/MovieList";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import css from "./HomePage.module.css";
 
@@ -32,19 +32,7 @@ const HomePage = () => {
     <div className={css.containe}>
       <h1 className={css.title}>Trend movies</h1>
       {error && <p>Error :{error.message}</p>}
-      <ul className={css.homeList}>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <Link
-              className={css.movieName}
-              to={`/movie/${movie.id}`}
-              state={location}
-            >
-              {movie.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <MovieList movies={movies} location={location} />
     </div>
   );
 };

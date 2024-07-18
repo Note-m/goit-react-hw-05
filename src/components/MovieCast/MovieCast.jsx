@@ -5,14 +5,14 @@ import axios from "axios";
 import css from "./MovieCast.module.css";
 
 const MovieCast = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(false);
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
+          `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`,
           {
             headers: {
               Authorization:
@@ -27,7 +27,7 @@ const MovieCast = () => {
       }
     };
     fetchMovies();
-  }, []);
+  }, [movieId]);
   return (
     <div>
       {error && <p>Error :{error.message}</p>}

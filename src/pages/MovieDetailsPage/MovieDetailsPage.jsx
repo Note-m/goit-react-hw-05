@@ -6,18 +6,18 @@ import axios from "axios";
 import css from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const location = useLocation();
-  const backLinkUrl = useRef(location.state ?? "/movie");
+  const backLinkUrl = useRef(location.state ?? "/movies");
   console.log(backLinkUrl);
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+          `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
           {
             headers: {
               Authorization:
@@ -32,7 +32,7 @@ const MovieDetailsPage = () => {
       }
     };
     fetchMovieDetails();
-  }, [id]);
+  }, [movieId]);
   if (error) {
     return <p>Something went wrong...</p>;
   }
@@ -42,7 +42,9 @@ const MovieDetailsPage = () => {
   }
   return (
     <div className={css.container}>
-      <Link to={backLinkUrl.current}>Go back</Link>
+      <Link to={backLinkUrl.current}>
+        <button className={css.btnBack}>Go back</button>
+      </Link>
 
       <img
         className={css.img}
@@ -50,7 +52,7 @@ const MovieDetailsPage = () => {
       />
       <h1>{movie.title}</h1>
       <p className={css.overview}>{movie.overview} </p>
-      <p>{movie.vote_average}</p>
+      <p>Average score: {movie.vote_average}</p>
       <div className={css.linkContainer}>
         <Link className={css.link} to="cast">
           Cast
