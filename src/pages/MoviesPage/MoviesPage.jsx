@@ -27,10 +27,10 @@
 //       const response = await axios.get(
 //         `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&language=en-US`,
 //         {
-//           headers: {
-//             Authorization:
-//               "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTM2Mjg0NDJlZTVjM2NiNDg3NjkzNjBlNmYyMTc5MSIsIm5iZiI6MTcyMTE4NTgyNC4wMTM1MTQsInN1YiI6IjY2OTVkMzdiYWI3MmNmNTQ4YzQ4ZDhiMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cr3vBS9F2X6D6hSi_DyCvlXD6A0vY9FxSPlSy8J4xfc",
-//             accept: "application/json",
+// headers: {
+//   Authorization:
+//     "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTM2Mjg0NDJlZTVjM2NiNDg3NjkzNjBlNmYyMTc5MSIsIm5iZiI6MTcyMTE4NTgyNC4wMTM1MTQsInN1YiI6IjY2OTVkMzdiYWI3MmNmNTQ4YzQ4ZDhiMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cr3vBS9F2X6D6hSi_DyCvlXD6A0vY9FxSPlSy8J4xfc",
+//   accept: "application/json",
 //           },
 //         }
 //       );
@@ -79,16 +79,15 @@ const MoviePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
 
+  const handleInpChange = (evt) => {
+    const value = evt.target.value;
+    setSearchQuery(value);
+  };
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     const query = params.get("movie") || "";
     setSearchQuery(query);
   }, [searchParams]);
-
-  const handleInpChange = (evt) => {
-    const value = evt.target.value;
-    setSearchQuery(value);
-  };
 
   const handleBtnSubmit = async (evt) => {
     evt.preventDefault();
@@ -99,7 +98,8 @@ const MoviePage = () => {
         `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&language=en-US`,
         {
           headers: {
-            Authorization: "Bearer YOUR_API_TOKEN",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTM2Mjg0NDJlZTVjM2NiNDg3NjkzNjBlNmYyMTc5MSIsIm5iZiI6MTcyMTE4NTgyNC4wMTM1MTQsInN1YiI6IjY2OTVkMzdiYWI3MmNmNTQ4YzQ4ZDhiMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cr3vBS9F2X6D6hSi_DyCvlXD6A0vY9FxSPlSy8J4xfc",
             accept: "application/json",
           },
         }
@@ -123,7 +123,7 @@ const MoviePage = () => {
             <input
               className={css.inp}
               type="text"
-              name="searchMovie"
+              name="searchMovies"
               placeholder="Search some movie"
               value={searchQuery}
               onChange={handleInpChange}
