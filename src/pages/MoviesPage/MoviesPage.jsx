@@ -190,11 +190,10 @@ const MoviePage = () => {
         params.set("movie", searchQuery);
         setSearchParams(params);
       } catch (error) {
-        if (movies === 0) {
-          setSearched(true);
-        } else {
-          setSearched(false);
-        }
+        setMovies([]);
+        setSearched(false);
+        setError(true);
+
         setError(true);
       }
     };
@@ -228,7 +227,7 @@ const MoviePage = () => {
               Search
             </button>
           </form>
-          {!searched && movies.length === 0 && searchQuery !== "" && (
+          {movies.length === 0 && (
             <p className={css.noResults}>No results for your request</p>
           )}
           <MovieList movies={movies} location={location} />
