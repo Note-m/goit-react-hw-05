@@ -79,7 +79,6 @@ const MoviePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
 
-  // При завантаженні компонента перевіряємо параметри запиту і встановлюємо searchQuery
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     const query = params.get("movie") || "";
@@ -108,7 +107,6 @@ const MoviePage = () => {
       setError(false);
       setMovies(response.data.results);
 
-      // Оновлюємо параметри запиту з введеним пошуковим запитом
       const params = new URLSearchParams(searchParams);
       params.set("movie", searchQuery);
       setSearchParams(params);
