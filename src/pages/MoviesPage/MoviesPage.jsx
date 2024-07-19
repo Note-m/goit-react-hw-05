@@ -78,6 +78,7 @@ const MoviePage = () => {
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
+  const [searched, setSearched] = useState(false);
 
   const handleInpChange = (evt) => {
     const value = evt.target.value;
@@ -106,12 +107,17 @@ const MoviePage = () => {
       );
       setError(false);
       setMovies(response.data.results);
-
+      if (movies.length === 0) {
+        setSearched(true);
+      }
       const params = new URLSearchParams(searchParams);
       params.set("movie", searchQuery);
       setSearchParams(params);
     } catch (error) {
       setError(true);
+      // if (movies.length === 0 && searchQuery !== "") {
+      //   return <p>No resalts for u request</p>;
+      // }
     }
   };
 
@@ -132,7 +138,9 @@ const MoviePage = () => {
               Search
             </button>
           </form>
-          {movies.length === 0 && <p>No resalts for u request</p>}
+          {searched && movies.length === 0 && searchQuery !== "" && (
+            <p>No resalts for u request</p>
+          )}
           <MovieList movies={movies} location={location} />
         </div>
       )}
