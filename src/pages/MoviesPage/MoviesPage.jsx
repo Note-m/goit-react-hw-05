@@ -132,6 +132,7 @@ const MoviePage = () => {
               Search
             </button>
           </form>
+          {movies.length === 0 && <p>No resalts for u request</p>}
           <MovieList movies={movies} location={location} />
         </div>
       )}
