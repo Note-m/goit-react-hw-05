@@ -1,7 +1,9 @@
 import css from "./MovieList.module.css";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const movieList = ({ movies, location }) => {
+const movieList = ({ movies }) => {
+  const location = useLocation();
   return (
     <div>
       {" "}

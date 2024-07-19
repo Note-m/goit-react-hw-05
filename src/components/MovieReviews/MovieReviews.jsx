@@ -30,7 +30,7 @@ const MovieReviews = () => {
   }, [movieId]);
   return (
     <div>
-      {reviews.length > 0 ? (
+      {reviews.length > 0 && !error ? (
         <ul className={css.revList}>
           {reviews.map((review) => (
             <li key={review.id}>
