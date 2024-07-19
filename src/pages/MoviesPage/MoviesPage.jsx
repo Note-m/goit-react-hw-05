@@ -19,12 +19,12 @@ const MoviePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const params = new URLSearchParams(searchParams);
-      const query = params.get("movie") || "";
+      // const params = new URLSearchParams(searchParams);
+      // const query = params.get("movie") || "";
 
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?query=${query}&language=en-US`,
+          `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&language=en-US`,
           {
             headers: {
               Authorization:
@@ -36,29 +36,24 @@ const MoviePage = () => {
 
         setError(false);
         setMovies(response.data.results);
-        const params = new URLSearchParams(searchParams);
-        params.set("movie", searchQuery);
-        setSearchParams(params);
-        if (!error) {
-          setSearched(false);
-        } else {
-          setSearched(true);
-        }
+        setSearched(true);
       } catch (error) {
-        setMovies([]);
-
+        setSearched(true);
         setError(true);
       }
     };
 
     fetchData();
-  }, [searchParams, searchQuery]);
+  }, [searchParams]);
 
   const handleBtnSubmit = (evt) => {
     evt.preventDefault();
-    if (searchQuery.trim() === "") return;
-
-    const params = new URLSearchParams(searchParams);
+    if (searchQuery.trim() === "") {
+      setSearched(false);
+      setMovies([]);
+      return;
+    }
+    const params = new URLSearchParams();
     params.set("movie", searchQuery);
     setSearchParams(params);
   };
@@ -80,9 +75,7 @@ const MoviePage = () => {
               Search
             </button>
           </form>
-          {!searched && movies.length === 0 && (
-            <p className={css.noResults}>No results</p>
-          )}
+          {movies.length === 0 && <p className={css.noResults}>No results</p>}
           <MovieList movies={movies} location={location} />
         </div>
       )}
